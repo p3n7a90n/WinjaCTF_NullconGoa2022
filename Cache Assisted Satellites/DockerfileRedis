@@ -1,0 +1,13 @@
+FROM redis:7.0.2
+
+COPY redis.conf /usr/local/etc/redis/redis.conf
+
+RUN mkdir -p /app/
+
+RUN useradd -u 1000 -m RedisServer
+
+RUN chown -R RedisServer /app/
+
+USER RedisServer
+
+CMD [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
